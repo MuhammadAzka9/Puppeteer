@@ -14,24 +14,24 @@ const loginToSauceDemo = async (username) => {
   const page = await browser.newPage();
   await page.goto('https://www.saucedemo.com/');
 
-  const usernameInput = await page.waitForXPath('//*[@id="user-name"]');
+  const usernameInput = await page.waitForSelector('#user-name');
   await usernameInput.click();
   await usernameInput.type(username);
 
-  const passwordInput = await page.waitForXPath('//*[@id="password"]');
+  const passwordInput = await page.waitForSelector('#password');
   await passwordInput.click();
   await passwordInput.type('secret_sauce');
 
-  const loginButton = await page.waitForXPath('//*[@id="login-button"]');
+  const loginButton = await page.waitForSelector('#login-button');
   await loginButton.click();
 
   // Wait for the login process to complete, you may need to adjust this delay
-  await page.waitForTimeout(2000);
+  await new Promise(resolve => setTimeout(resolve, 2000));
 
   // Additional logic or actions after login can be added here
 
   // Uncomment the line below if you want to keep the browser open after login
-  // await page.waitForTimeout(5000);
+  // await new Promise(resolve => setTimeout(resolve, 5000));
 
   await browser.close();
 };
